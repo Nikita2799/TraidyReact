@@ -26,6 +26,7 @@ export const SingIn = () =>{
       }
     return(
         <View>
+            <Text>Пидор</Text>
             <Text style={styles.text}>Login</Text>
             <View style= {styles.inputView}>
                 <TextInput style={styles.input}  onChangeText={(text)=>{setLoginData({login: text})}}/>
