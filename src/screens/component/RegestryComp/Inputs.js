@@ -1,19 +1,44 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {View,StyleSheet,Text, TextInput, TouchableOpacity} from 'react-native'
 
 export const Inputs = ()=>{
+    const url = ''
+    const [dataReg,setDataReg] = useState({
+        id: Date.now().toString(),
+        login: '',
+        password: ''
+    })
+
+    
+    const regestyDataPost = async () => {
+        try{
+            const responce = await  fetch(url,{
+                  method: 'POST',
+                  headers: {'Content-Type':'application/json'},
+                  body: JSON.stringify(dataReg)
+              })
+              let data = await responce.json()
+
+              if(data.find(()=>success===1)){
+    
+              }
+            }catch(e){
+                console.log(e.toString())
+            }
+    }
+
     return(
         <View>
             <Text style={styles.text}>Login</Text>
             <View style= {styles.inputView}>
-                <TextInput style={styles.input}/>
+                <TextInput style={styles.input} onChangeText={text=>setDataReg({login: text})}/>
             </View>
             <Text style={styles.text}>Password</Text>
             <View style={styles.inputView}>
-                <TextInput style={styles.input}/>
+                <TextInput style={styles.input} onChangeText={text=>setDataReg({login: text})}/>
             </View>
             <View style= {styles.buttonPozition}>
-                <TouchableOpacity style={styles.buttonSingIn}>
+                <TouchableOpacity onPress={regestyDataPost} style={styles.buttonSingIn}>
                     <Text style={styles.textButton}>Sign up</Text>
                 </TouchableOpacity>
             </View>

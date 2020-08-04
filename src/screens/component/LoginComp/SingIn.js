@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
-import {View,Text,StyleSheet,TextInput,Button, TouchableOpacity, Alert} from 'react-native'
+import {View,Text,StyleSheet,TextInput,Button, TouchableOpacity} from 'react-native'
+import { MainScreen } from '../../../MainScreen';
 
-export const SingIn = () =>{
+export const SingIn = ({renderProfile}) =>{
     const url = "http://traidy-game.com/users/loginUser";
     const [loginData,setLoginData] = useState({
         id:Date.now().toString(),
@@ -16,10 +17,13 @@ export const SingIn = () =>{
               body: JSON.stringify(loginData)
           })
           let data = await responce.json()
-          console.log('DATA',data)
+          console.log(data.success)
+          let suc = data.success === 2 ? true:false
+          
+          renderProfile(suc)
+          
         }catch(e){
             console.log(e.toString())
-
         }
          // const data =  responce.json()
          // Alert.alert(data)

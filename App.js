@@ -5,6 +5,7 @@ import  {AppLoading} from 'expo'
 
 import { LoginScreen } from './src/screens/LoginScreen';
 import {RegistrScreen} from './src/screens/RegistrScreen'
+import { MainScreen } from './src/MainScreen';
 
 async function loadAplication(){
   await Font.loadAsync({
@@ -14,7 +15,7 @@ async function loadAplication(){
 
 export default function App() {
   const [isReady,setIsReady] = useState(false)
-  const [next,setNext] = useState(false)
+  const [next,setNext] = useState(1)
 
   if(!isReady){
     return <AppLoading 
@@ -25,13 +26,16 @@ export default function App() {
   const PressHandler=(action)=>{
       setNext(action)
   }
-  
-  let content = (
-    <LoginScreen onSubmit={PressHandler} />
-  )
-  if(next!==false){
-    content=<RegistrScreen onBack= {()=>setNext(false)}/>
+  const renderProfile = ()=>{
+    setNext(3)
   }
+  let content = (
+    <LoginScreen onSubmit={PressHandler} renderProfile={renderProfile}/>
+  )
+  if(next===2){
+    content=<RegistrScreen onBack= {()=>setNext(1)}/>
+  }
+  if(next===3) content = <MainScreen/>
 
  
   
